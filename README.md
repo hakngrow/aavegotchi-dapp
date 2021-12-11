@@ -84,5 +84,113 @@ We can use the Aavegotchi Subgraph to pull in our list of Aavegotchi's data. You
 
 ![Aavegotchi Subgraph](/public/images/subgraph.jpg)
 
+On the right, there is a Schema that allows you to visualise the data we can fetch.  Based on the Scehma, we can decide what data we want to be returned from the query. 
+
+For our Aavegotchi DApp, we want the:
+
+- name
+- id
+- collateral
+- numeric traits
+
+![Aavegotchi Subgraph - Query](/public/images/subgraph-query.jpg)
+
+### Using the Subgraph Query in React
+
+To use the subgraph query, we need to install 2 modules, `graphQL` and `graphql-request` as our graphQL client. 
+
+Open up a new terminal, and inside your `aavegotchi-dapp` directory run:
+```
+npm install graphql-request graphql
+```
+
+In `App.tsx`, enter the following new lines of code:
+```
+//App.tsx
+
+import { useEffect } from 'react';
+import { request } from "graphql-request"; // <-- New line
+import './App.css';
+
+const uri = 'https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic';
+
+function App() {
+
+ const fetchGotchis = async () => {
+   const query = `
+   {
+     aavegotchis(first: 100, orderBy: gotchiId) {
+       id
+       name
+       collateral
+       withSetsNumericTraits
+     }
+   }`;
+    
+   const response = await request(uri, query);
+   console.log(response);
+  }
+...
+```
+
+If you are getting a Typescript runtime error, run `npm install @types/react --dev`.
+
+On refreshing, you should now see the Aavegotchi data logged in your console.
+
+The imported `request` function requires 2 arguments, the target URL and the query. We get the URL from the [Aavegotchi Subgraph](https://thegraph.com/hosted-service/subgraph/aavegotchi/aavegotchi-core-matic) under Queries (HTTP), this tells the GraphQL request where to target.
+
+We convert the query we tested earlier into a string. We then asynchronously waited for the response to return and logged it in the console.
+
+Now that we know the GraphQL `request` works, we need to store it in the `App` component state so we can display it in the UI. For this, we use the `useState` React hook. However, because we are using Typescript we need to first set up our interface.
+
+Create a new folder under `src` called `types` and inside create an `index.ts` file. In `src/types/index.ts` put in the following code:
+```
+// types/index.ts
+
+export interface Gotchi {
+ collateral: string;
+ id: string;
+ name: string;
+ withSetsNumericTraits: Array<Number>;
+}
+
+export interface QueryResponse {
+ aavegotchis: Array<Gotchi>
+}
+```
+
+Now at the top of `App.tsx` import our types and the `useState` hook from React, and edit the `fetchGotchis` function to store the response in the state:
+```
+//App.tsx
+
+import { useEffect, useState } from 'react';
+import { Gotchi, QueryResponse } from './types';
+...
+
+function App() {
+  const [ gotchis, setGotchis ] = useState<Array<Gotchi>>([]);
+
+  const fetchGotchis = async () => {
+    const query = `
+      {
+        aavegotchis(first: 100, orderBy: gotchiId) {
+          id
+          name
+          collateral
+          withSetsNumericTraits
+        }
+      }
+    `
+    const response = await request<QueryResponse>(uri, query);
+    setGotchis(response.aavegotchis)
+  }
+  ...
+}
+```
+
+
+
+
+
 
 

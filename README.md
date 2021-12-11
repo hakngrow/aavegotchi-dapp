@@ -188,6 +188,29 @@ function App() {
 }
 ```
 
+Now that we have stored the data, we can map it onto the screen.
+```
+//App.tsx
+
+return (
+  <div className="App">
+    {gotchis.map((gotchi, i) => {
+      return (
+        <p key={i}>{gotchi.name}</p>
+      )
+    })}
+  </div>
+);
+```
+
+On refresh, we should now see a list of names on the screen.
+
+![Aavegotchi Names](/public/images/names.jpg)
+
+Next we are going to create a new component for the Aavegotchi listing, that allows you to select an Aavegotchi.
+
+### Styling our App
+
 
 
 

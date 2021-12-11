@@ -159,6 +159,35 @@ export interface QueryResponse {
 }
 ```
 
+Now at the top of `App.tsx` import our types and the `useState` hook from React, and edit the `fetchGotchis` function to store the response in the state:
+```
+//App.tsx
+
+import { useEffect, useState } from 'react';
+import { Gotchi, QueryResponse } from './types';
+...
+
+function App() {
+  const [ gotchis, setGotchis ] = useState<Array<Gotchi>>([]);
+
+  const fetchGotchis = async () => {
+    const query = `
+      {
+        aavegotchis(first: 100, orderBy: gotchiId) {
+          id
+          name
+          collateral
+          withSetsNumericTraits
+        }
+      }
+    `
+    const response = await request<QueryResponse>(uri, query);
+    setGotchis(response.aavegotchis)
+  }
+  ...
+}
+```
+
 
 
 

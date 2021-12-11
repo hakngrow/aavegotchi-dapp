@@ -42,5 +42,39 @@ cd aavegotchi-dapp
 npm start
 ```
 
+This should automatically open up your browser and you should see the default React app running at `localhost:3000`. If not open up your browser and manually enter `http://localhost:3000/` in the address bar.
 
+![Default React App](/public/images/default.jpg)
+
+In the code editor of choice (I personally use [Visual Studio Code](https://code.visualstudio.com/)), open up the `aavegotchi-dapp` folder.
+
+In `src/App.tsx` replace all the code with the following and save:
+```
+//App.tsx
+
+import { useEffect } from 'react';
+import './App.css';
+
+function App() {
+
+ const fetchGotchis = () => {
+   console.log('Blank page');
+ }
+
+ useEffect(() => {
+   fetchGotchis();
+ }, [])
+
+ return (
+   <div className="App">
+   </div>
+ );
+}
+
+export default App;
+```
+
+Your app refreshes and should now be blank. However, if you right-click and `Inspect` the webpage, you should see `Blank page` in the console.
+
+When the `App` component is rendered, the `useEffect()` hook is triggered, which in turn triggers the `fetchGotchis()` function. In the `fetchGotchis()` function, we will put our logic to fetch the Aavegotchi data from the blockchain.
 

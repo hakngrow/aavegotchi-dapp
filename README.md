@@ -141,7 +141,25 @@ The imported `request` function requires 2 arguments, the target URL and the que
 
 We convert the query we tested earlier into a string. We then asynchronously waited for the response to return and logged it in the console.
 
-Now that we know the subgraph `request` works, we need to store it in the `App` component state so we can display it in the UI. For this, we use the `useState` React hook. However, because we are using Typescript we need to first set up our interface.
+Now that we know the GraphQL `request` works, we need to store it in the `App` component state so we can display it in the UI. For this, we use the `useState` React hook. However, because we are using Typescript we need to first set up our interface.
+
+Create a new folder under `src` called `types` and inside create an `index.ts` file. In `src/types/index.ts` put in the following code:
+```
+// types/index.ts
+
+export interface Gotchi {
+ collateral: string;
+ id: string;
+ name: string;
+ withSetsNumericTraits: Array<Number>;
+}
+
+export interface QueryResponse {
+ aavegotchis: Array<Gotchi>
+}
+```
+
+
 
 
 

@@ -76,5 +76,13 @@ export default App;
 
 Your app refreshes and should now be blank. However, if you right-click and `Inspect` the webpage, you should see `Blank page` in the console.
 
-When the `App` component is rendered, the `useEffect()` hook is triggered, which in turn triggers the `fetchGotchis()` function. In the `fetchGotchis()` function, we will put our logic to fetch the Aavegotchi data from the blockchain.
+When the `App` component is rendered, the `useEffect` hook is triggered, which in turn triggers the `fetchGotchis` function. In the `fetchGotchis` function, we will put our logic to fetch the Aavegotchi data from the blockchain.
+
+### Using the Aavegotchi Subgraph
+
+We can use the Aavegotchi Subgraph to pull in our list of Aavegotchi's data. You can open up the Subgraph playground [here](https://thegraph.com/explorer/subgraph/aavegotchi/aavegotchi-core-matic) to get your graphQL query tested before writing any code.
+
+![Aavegotchi Subgraph](/public/images/subgraph.jpg)
+
+
 

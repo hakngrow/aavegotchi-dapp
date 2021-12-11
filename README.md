@@ -133,6 +133,16 @@ function App() {
 ...
 ```
 
+If you are getting a Typescript runtime error, run `npm install @types/react --dev`.
+
+On refreshing, you should now see the Aavegotchi data logged in your console.
+
+The imported `request` function requires 2 arguments, the target URL and the query. We get the URL from the [Aavegotchi Subgraph](https://thegraph.com/hosted-service/subgraph/aavegotchi/aavegotchi-core-matic) under Queries (HTTP), this tells the GraphQL request where to target.
+
+We convert the query we tested earlier into a string. We then asynchronously waited for the response to return and logged it in the console.
+
+Now that we know the subgraph `request` works, we need to store it in the `App` component state so we can display it in the UI. For this, we use the `useState` React hook. However, because we are using Typescript we need to first set up our interface.
+
 
 
 

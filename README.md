@@ -84,5 +84,56 @@ We can use the Aavegotchi Subgraph to pull in our list of Aavegotchi's data. You
 
 ![Aavegotchi Subgraph](/public/images/subgraph.jpg)
 
+On the right, there is a Schema that allows you to visualise the data we can fetch.  Based on the Scehma, we can decide what data we want to be returned from the query. 
+
+For our Aavegotchi DApp, we want the:
+
+- name
+- id
+- collateral
+- numeric traits
+
+![Aavegotchi Subgraph - Query](/public/images/subgraph-query.jpg)
+
+### Using the Subgraph Query in React
+
+To use the subgraph query, we need to install 2 modules, `graphQL` and `graphql-request` as our graphQL client. 
+
+Open up a new terminal, and inside your `aavegotchi-dapp` directory run:
+```
+npm install graphql-request graphql
+```
+
+In `App.tsx`, enter the following new lines of code:
+```
+//App.tsx
+
+import { useEffect } from 'react';
+import { request } from "graphql-request"; // <-- New line
+import './App.css';
+
+const uri = 'https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic';
+
+function App() {
+
+ const fetchGotchis = async () => {
+   const query = `
+   {
+     aavegotchis(first: 100, orderBy: gotchiId) {
+       id
+       name
+       collateral
+       withSetsNumericTraits
+     }
+   }`;
+    
+   const response = await request(uri, query);
+   console.log(response);
+  }
+...
+```
+
+
+
 
 

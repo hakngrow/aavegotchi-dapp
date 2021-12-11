@@ -24,7 +24,7 @@ function App() {
 
   const [gotchis, setGotchis] = useState<Array<Gotchi>>([]);
   const [selectedGotchi, setSelectedGotchi] = useState<number>(0);
-  const [ gotchiSVG, setGotchiSVG ] = useState('');
+  const [gotchiSVG, setGotchiSVG] = useState("");
 
   const [collaterals, setCollaterals] = useState<Array<Collateral>>([]);
 
@@ -39,15 +39,15 @@ function App() {
 
   const fetchGotchis = async () => {
     const query = `
-   {
-     aavegotchis(first: 100, orderBy: gotchiId) {
-       id
-       name
-       collateral
-       withSetsNumericTraits
-     }
-   }
- `;
+    {
+      aavegotchis(first: 100, orderBy: gotchiId) {
+        id
+        name
+        collateral
+        withSetsNumericTraits
+      }
+    }`;
+    
     const response = await request<QueryResponse>(uri, query);
     setGotchis(response.aavegotchis);
   };
@@ -81,7 +81,7 @@ function App() {
     const getAavegotchiSVG = async (tokenId: string) => {
       const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
       setGotchiSVG(svg);
-      console.log(gotchiSVG)
+      console.log(gotchiSVG);
     };
 
     if (contract && gotchis.length > 0) {

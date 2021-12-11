@@ -24,6 +24,23 @@ In this tutorial, we are going to build an Aavegotchi Pokédex that allows the u
 
 ![Aavegotchi DApp](/public/images/build.jpg)
 
+### Initial Setup
+
+Make sure you have `node >= 10.16` and `npm >= 5.6` installed on your machine. You will also need an Ethereum compatible browser (if you are using Chrome or Firefox you will need to install the [Metamask](https://metamask.io/) browser extension) connected to the Matic Network.  For instructions on how to setup Metamask on the Matic Network, click [here](https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/).
+
+Now that is done, let us create our React app. To do this, open up your terminal, and run the following line:
+
+```
+npx create-react-app aavegotchi-dapp --template typescript
+```
+
+This will build a React app inside a newly created directory `aavegotchi-dapp`. Using `--template typescript` configures the React app to use Typescript.
+
+After the installation is done, in your terminal run:
+```
+cd aavegotchi-dapp
+npm start
+```
 
 
 

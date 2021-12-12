@@ -466,6 +466,115 @@ export const SelectedGotchi = ({ name, traits }: Props) => {
 }
 ```
 
+In `SelectedGotchi/styles.css`, enter the following:
+```
+.selected-gotchi-container {
+  display: grid;
+  grid-template-rows: 15% 35% 50%;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.name-container {
+  display: grid;
+  place-items: center;
+  border: 5px solid #e5df40;
+  background-color: #fffa65;
+  text-transform: uppercase;
+}
+.name-container h2 {
+  margin: 0;
+}
+
+.svg-container {
+  display: grid;
+  place-items: center;
+}
+.svg-container > svg {
+  height: 100%;
+}
+
+.traits-container {
+  padding: 0.4rem;
+  background-color: white;
+  border: 5px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 12px;
+  column-gap: 16px;
+}
+.trait {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trait p {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .selected-gotchi-container {
+    grid-template-rows: 72px 1fr 170px;
+  }
+
+  .svg-container > svg {
+    height: revert;
+    max-height: 450px;
+  }
+
+  .traits-container {
+    padding: 1.6rem;
+  }
+}
+```
+
+We can now render our new component in `App.tsx` as follows:
+```
+//App.tsx
+
+...
+
+import { SelectedGotchi } from './components/SelectedGotchi';
+
+...
+
+function App() {
+
+ ...
+
+ return (
+  <div className="App">
+    ...
+      <div className="selected-container">
+        {gotchis.length > 0 && (
+          <SelectedGotchi
+            name={gotchis[selectedGotchi].name} 
+            traits={gotchis[selectedGotchi].withSetsNumericTraits}
+          />
+        )}
+      </div>
+      ...
+  </div>
+ );
+}
+
+export default App;
+```
+
+We check if any Aavegotchis' exist in the array, then we render the `<SelectedGotchi/>` component. We then use the `selectedGotchi` index to get the target Aavegotchi name and traits from the `gotchis` array.
+
+You should now be able to select a Aavegotchi and see the name and traits change in the new component.
+
+![Selected Gotchi Component](/public/images/components-SelectedGotchi.jpg)
+
+For the final part of the tutorial, we will use `Web3` to retrieve data from the Aavegotchi smart contract.
+
+### Using `Web3`
+
+
+
 
 
 

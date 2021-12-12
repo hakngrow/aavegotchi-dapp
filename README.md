@@ -211,7 +211,64 @@ Next we are going to create a new component for the Aavegotchi listing, that all
 
 ### Styling our App
 
+In `App.tsx`, replace the returned `JSX` with the following code:
+```
+//App.tsx
 
+return (
+  <div className="App">
+    <div className="container">
+      <div className="selected-container">
+      </div>
+      <div className="gotchi-list">
+      </div>
+    </div>
+  </div>
+);
+```
+
+In `App.css`, replace the CSS with:
+```
+.App {
+ display: block;
+ text-align: center;
+ height: 100vh;
+ background-color: #FA34F3;
+ box-sizing: border-box;
+}
+
+.container {
+ display: grid;
+ grid-template-rows: 50% 50%;
+ box-sizing: border-box;
+ height: 100%;
+ width: 100%;
+}
+
+.gotchi-list {
+ background-color: white;
+ border-left: 5px solid black;
+ border-right: 5px solid black;
+ height: 100%;
+ overflow-x: hidden;
+ overflow-y: scroll;
+ box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+ .container {
+   max-width: 1300px;
+   margin: 0 auto;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: revert;
+ }
+ .selected-container {
+   box-sizing: border-box;
+   padding: 16px;
+   height: 100%;
+ }
+}
+```
 
 
 

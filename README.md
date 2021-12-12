@@ -387,7 +387,11 @@ And inside the `<div>` with a `className` of `gotchi-list`, map out the `<Gotchi
 </div>
 ```
 
->If you are getting a run time error, inside SelectedGotchi/index.tsx type and save export {} as a temporary fix.
+>If you are getting a run time error, in `SelectedGotchi/index.tsx` type and save `export {}` as a temporary fix.
+
+![Gotchi Listing component](/public/images/components-GotchiListing.jpg)
+
+
 
 
 

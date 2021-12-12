@@ -393,10 +393,78 @@ At this point, you will be able to scroll through a list of Aavegotchis.
 
 ![Gotchi Listing component](/public/images/components-GotchiListing.jpg)
 
-We are not passing the `gotchi.collateral` to the `collateralColor` parameter. That's because the `collateral` we get returned isn't a hex code, but a unique ID for the collateral. We will have to use `Web3` later to call the Aavegotchi contract to receive what the corresponding color.
+We are not passing the `gotchi.collateral` to the `collateralColor` parameter. That's because the `collateral` is not a hex code, but a unique ID for the collateral. We will use `Web3` later to call the Aavegotchi contract to receive the corresponding color.
 
+### Render the Selected Aavegotchi
 
+We create another state within `App.tsx` for the selected Aavegotchi's index:
+```
+//App.tsx
 
+const [ selectedGotchi, setSelectedGotchi ] = useState<number>(0);
+```
+
+When we click on a Aavegotchi on the listing, we want to set the index position of the selected Aavegotchi in the state. And then we can use the saved index to check whether a listed Aavegotchi is selected:
+```
+//App.tsx
+
+<GotchiListing
+  ...
+  selectGotchi={() => setSelectedGotchi(i)}
+  selected={i === selectedGotchi}
+/>
+```
+
+When you click a Aavegotchi on the listing you should now see the listing is highlighted.
+
+Now let us display the selection in a new `SelectedGotchi` component. In `SelectedGotchi/index.tsx`, enter in the following code:
+```
+// SelectedGotchi/index.tsx
+
+import './styles.css'
+
+interface Props {
+ name: string;
+ traits: Array<Number>;
+}
+
+export const SelectedGotchi = ({ name, traits }: Props) => {
+  return (
+    <div className="selected-gotchi-container">
+      <div className="name-container">
+        <h2>{name}</h2>
+      </div>
+      <div className="svg-container" />
+      <div className="traits-container">
+        <div className="trait">
+          <p>⚡ Energy</p>
+          <p>{traits[0]}</p>
+        </div>
+        <div className="trait">
+          <p>👹 Aggression</p>
+          <p>{traits[1]}</p>
+        </div>
+        <div className="trait">
+          <p>👻 Spookiness</p>
+          <p>{traits[2]}</p>
+        </div>
+        <div className="trait">
+          <p>🧠 Brain size</p>
+          <p>{traits[3]}</p>
+        </div>
+        <div className="trait">
+          <p>👀 Eye shape</p>
+          <p>{traits[4]}</p>
+        </div>
+        <div className="trait">
+          <p>👁 Eye color</p>
+          <p>{traits[5]}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
 
 
 

@@ -286,6 +286,106 @@ Your folder structure should now look like this:
 
 ### Render the Aavegotchi Listing
 
+In `GotchiListing/index.tsx`, enter the following content:
+```
+// GotchiListing/index.tsx
+
+import "./styles.css"
+
+interface Props {
+  id: string;
+  name: string;
+  collateralColor: string;
+  selected: boolean;
+  selectGotchi: () => void;
+}
+
+export const GotchiListing = ({ id, name, collateralColor, selected, selectGotchi }: Props) => {
+ return (
+   <div className={`gotchi-listing ${selected && 'selected'}`} onClick={() => selectGotchi()}>
+     <div className="collateral-container">
+       <div className="collateral" style={{ backgroundColor: collateralColor }} />
+       </div>
+     <p className="id">{id}</p>
+     <p className="name">{name}</p>
+   </div>
+ )
+}
+```
+
+The `interface` tells the editor that the `GotchiListing` component expects the following properties:
+
+`name` - Name of the Aavegotchi
+`id` - Id of the Aavegotchi
+`collateralColor` - Primary color of the collateral (more on this later)
+`selected` - boolean of whether the item is selected or not
+`selectGotchi` - Function that passes the click event to the parent
+
+For styling, enter in `GotchiListing/styles.css`:
+```
+.gotchi-listing {
+  display: flex;
+  cursor: pointer;
+}
+.gotchi-listing.selected,
+.gotchi-listing:hover {
+  background-color: #fffa65;
+}
+
+.collateral-container {
+  width: 54px;
+  display: grid;
+  place-items: center;
+}
+
+.collateral {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.id {
+  padding-right: 12px;
+  width: 60px;
+  text-align: right;
+}
+
+.name {
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+```
+
+Now inside `App.tsx`, import in and render the new `GotchiListing` component.
+
+At the top,  with the other imports enter:
+```
+//App.tsx
+
+import { GotchiListing } from './components/GotchiListing';
+```
+
+And inside the `<div>` with a `className` of `gotchi-list`, map out the `<GotchiListing/>` component for each Aavegotchi stored in the state:
+```
+//App.tsx
+
+<div className="gotchi-list">
+  {
+    gotchis.map((gotchi, i) => (
+      <GotchiListing
+        key={gotchi.id}
+        id={gotchi.id}
+        name={gotchi.name}
+        collateralColor="black"
+        selectGotchi={() => null}
+        selected={false}
+      />
+    ))
+  }
+</div>
+```
 
 
 

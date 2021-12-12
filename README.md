@@ -270,6 +270,24 @@ In `App.css`, replace the CSS with:
 }
 ```
 
+### Creating UI Components
+
+We want to create a new component for the Aavegotchi listing as well as for the selected Aavegotchi.
+
+So within `src` create a new folder called `components`.  
+
+In `components`, create 2 more folders called `GotchiListing` and `SelectedGotchi` 
+
+Within both, create an `index.tsx` and a `styles.css` file.
+
+Your folder structure should now look like this:
+
+![UI Components Folders](/public/images/components-folders.jpg)
+
+### Render the Aavegotchi Listing
+
+
+
 
 
 

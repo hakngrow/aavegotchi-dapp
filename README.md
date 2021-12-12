@@ -389,7 +389,11 @@ And inside the `<div>` with a `className` of `gotchi-list`, map out the `<Gotchi
 
 >If you are getting a run time error, in `SelectedGotchi/index.tsx` type and save `export {}` as a temporary fix.
 
+At this point, you will be able to scroll through a list of Aavegotchis.
+
 ![Gotchi Listing component](/public/images/components-GotchiListing.jpg)
+
+We are not passing the `gotchi.collateral` to the `collateralColor` parameter. That's because the `collateral` we get returned isn't a hex code, but a unique ID for the collateral. We will have to use `Web3` later to call the Aavegotchi contract to receive what the corresponding color.
 
 
 

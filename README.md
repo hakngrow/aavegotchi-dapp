@@ -211,6 +211,22 @@ Next we are going to create a new component for the Aavegotchi listing, that all
 
 ### Styling our App
 
+In `App.tsx` replace the returned JSX with the following code:
+
+```
+//App.tsx
+return (
+  <div className="App">
+    <div className="container">
+      <div className="selected-container">
+      </div>
+      <div className="gotchi-list">
+      </div>
+    </div>
+  </div>
+);
+```
+
 
 
 

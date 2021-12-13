@@ -575,13 +575,13 @@ For the final part of the tutorial, we will use `Web3` to retrieve data from the
 
 To query information on the blockchain you need 3 things:
 
-**A provider** - 
+1. **A provider** - 
 The provider is your choice of the node which talks to the Matic Network. If you have Metamask installed or are you using an Ethereum compatible browser then that will be used as your line of communication.
 
-**The smart contracts address** -
+2. **The smart contracts address** -
 This is essentially the URL of the Aavegotchi smart contract, this can be found at the [Aavegotchi Contracts GitHub](https://github.com/aavegotchi/aavegotchi-contracts).  We need the Polygon diamond address (*0x86935F11C86623deC8a25696E1C19a8659CbF95d*) as it has access to all the facets we need.
 
-**The ABI (application binary interface)** - 
+3. **The ABI (application binary interface)** - 
 This is a JSON file needed to encode and decode the calls to and from the Solidity smart contract. We also can download/copy this from the Aavegotchi Github [here](https://github.com/aavegotchi/aavegotchi-contracts/blob/master/diamondABI/diamond.json).
 
 

@@ -584,6 +584,31 @@ This is essentially the URL of the Aavegotchi smart contract, this can be found 
 3. **The ABI (application binary interface)** - 
 This is a JSON file needed to encode and decode the calls to and from the Solidity smart contract. We also can download/copy this from the Aavegotchi Github [here](https://github.com/aavegotchi/aavegotchi-contracts/blob/master/diamondABI/diamond.json).
 
+### Setting Up the Smart Contract
+
+First install `web3`:
+```
+npm install web3
+```
+
+In the `src` folder, create a new folder named `abi` and inside it create a JSON file named `diamondABI.json`. In the JSON file, copy and paste the whole JSON object from the Aavegotchi Github.
+
+In `App.tsx`, import the following:
+```
+//App.tsx
+
+import Web3 from 'web3';
+import diamondABI from './abi/diamondABI.json';
+import { Contract } from 'web3-eth-contract';
+import { AbiItem } from 'web3-utils/types'
+
+const diamondAddress = '0x86935F11C86623deC8a25696E1C19a8659CbF95d';
+```
+> The `Contract` and `AbiItem` are used only for Typescript purposes.
+
+
+
+
 
 
 

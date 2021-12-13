@@ -632,6 +632,10 @@ function App() {
   }, [])
 ```
 
+>We used `Web3.givenProvider` as the provider, this is automatically available if you are using an Ethereum compatible browser. If you don't have an Ethereum compatible browser then instead you can set up a remote or local node and use that as your provider.
+
+### Interacting with the Smart Contract
+
 
 
 

@@ -604,7 +604,33 @@ import { AbiItem } from 'web3-utils/types'
 
 const diamondAddress = '0x86935F11C86623deC8a25696E1C19a8659CbF95d';
 ```
-> The `Contract` and `AbiItem` are used only for Typescript purposes.
+> `Contract` and `AbiItem` are used only for Typescript purposes.
+
+Store the address we found in the Aavegotchi Github in the `const` `diamondAddress`.
+
+In the `App` component, create a new function called `connectToWeb3()` that will create our contract and save it in the state.
+
+We want to call `connectToWeb3()` when the page first renders, therefore we put it in the `useEffect()` after `fetchGotchis()`.
+```
+// App.tsx
+
+function App() {
+  ...
+  const [ contract, setContract ] = useState<Contract | null>(null);
+
+  const connectToWeb3 = () => {
+    const web3 = new Web3(Web3.givenProvider);
+    const aavegotchiContract = new web3.eth.Contract(diamondABI as AbiItem[], diamondAddress);
+    setContract(aavegotchiContract);
+  }
+
+  ...
+
+  useEffect(() => {
+    fetchGotchis();
+    connectToWeb3();
+  }, [])
+```
 
 
 

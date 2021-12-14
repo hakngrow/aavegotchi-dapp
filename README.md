@@ -667,7 +667,87 @@ After `connectToWeb3()`,  `contract` contains a reference to the Aavegotchi smar
 You should see the different collaterals logged in your browser's console.
 ![Aavegotchi Collaterals](/public/images/console-fetchAavegotchiCollaterals.jpg)
 
+Use the logged output to create a type definition for collaterals. In `src/types/index.ts`, create a new interface for `Collateral` as below:
+```
+export interface Collateral {
+    collateralType: string;
+    collateralTypeInfo: {
+        cheekColor: string;
+        conversionRate: string;
+        delisted: boolean;
+        eyeShapeSvgId: string;
+        modifiers: Array<string>;
+        primaryColor: string;
+        secondaryColor: string;
+        svgId: string;
+    }
+}
+```
 
+In `App.tsx`, import the `Collateral` interface and create a new state which expects an array of collaterals and in the `fetchAavegotchiCollaterals()` function we can set the state:
+```
+//App.tsx
+
+function App() {
+  ...
+  const [ collaterals, setCollaterals ] = useState<Array<Collateral>>([]);
+  ...
+
+ useEffect(() => {
+  if (!!contract) {
+    const fetchAavegotchiCollaterals = async () => {
+      const collaterals = await contract.methods.getCollateralInfo().call();
+      setCollaterals(collaterals); // <- Replaced console.log()
+    };
+
+    fetchAavegotchiCollaterals();
+  }
+}, [contract]);
+```
+
+Having all the collaterals stored in the state, we create a function that takes the `gotchi.collateral`, finds it within `collaterals` and returns the corresponding `primaryColor`.
+
+```
+//App.tsx
+
+function App() {
+
+  ...
+
+  const getCollateralColor = (gotchiCollateral: string) => {
+    const collateral = collaterals.find(item => item.collateralType.toLowerCase() === gotchiCollateral);
+    if (collateral) {
+      return collateral.collateralTypeInfo.primaryColor.replace("0x", '#');
+    }
+    return "white";
+  }
+
+  ...
+
+  return (
+    <div className="App">
+        ...
+        <div className="gotchi-list">
+          {
+            gotchis.map((gotchi, i) => (
+              <GotchiListing
+                ...
+                collateralColor={getCollateralColor(gotchi.collateral)}
+                ...
+              />
+            ))
+          }
+        </div>
+        ...
+    </div>
+  );
+}
+```
+>The replace function formats the `primaryColor` value into a hex code that CSS can interpret.
+
+The Aavegotchi listing should now have the colors that represents each individual Aavegotchi collateral.
+
+![](/public/images/components-GotchiListing-colors.jpg))
 
 
 

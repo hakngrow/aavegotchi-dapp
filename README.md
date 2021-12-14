@@ -632,9 +632,15 @@ function App() {
   }, [])
 ```
 
->We used `Web3.givenProvider` as the provider, this is automatically available if you are using an Ethereum compatible browser. If you don't have an Ethereum compatible browser then instead you can set up a remote or local node and use that as your provider.
+>We used `Web3.givenProvider` as the provider, this is automatically available if you are using an Ethereum compatible browser. If you don't have an Ethereum compatible browser, you can set up a remote or local node and use that as your provider.
 
 ### Interacting with the Smart Contract
+
+Calling methods on a contract may require gas. This applies to methods that have to add, delete or change information on the contract. Viewing data requires no manipulation of the contract and is gas-free.
+
+First, we want to call the [`getCollateralInfo()`](https://docs.aavegotchi.com/diamond-facets/collateralfacet.sol#function-getcollateralinfo-external) method to retrieve the collateral primary colors, so that we can pass each `<GotchiListing/>` component the correct color. By visiting the [Aavegotchi Developer Documentation](https://docs.aavegotchi.com/) you can find the methods names for the various contracts. 
+
+To do this, create a new `useEffect()` hook within `App.tsx` which has the contract as a dependency:
 
 
 

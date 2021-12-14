@@ -751,9 +751,9 @@ The Aavegotchi listing should now have the colors that represents each individua
 
 ### Displaying the Aavegotchi SVG
 
-Next we have to display the selected Aavegotchi's image. All the Aavegotchi SVG’s are stored within the blockchain itself. Base on the [Aavegotchi Documentation](https://docs.aavegotchi.com/diamond-facets/svgfacet.sol) the method to use is `getAavegotchiSvg(tokenId)`. This method requires passing an Aavegotchis Id as a parameter.
+Next we have to display the selected Aavegotchi's image. All the Aavegotchi SVG’s are stored within the blockchain itself. Base on the [Aavegotchi Documentation](https://docs.aavegotchi.com/diamond-facets/svgfacet.sol), the method to use is `getAavegotchiSvg(tokenId)`. This method requires passing an Aavegotchi Id as a parameter.
 
-Every time we select a Aavegotchi we want to render the SVG within our `SelectedGotchi` component. We will use a new `useEffect()` hook that will trigger every time `selectedGotchi`, `gotchis` or `contract` changes:
+When we select a Aavegotchi, we want to render the SVG within our `SelectedGotchi` component. We will use a new `useEffect()` hook that will trigger every time `selectedGotchi`, `gotchis` or `contract` changes:
 ```
 //App.tsx
 
@@ -802,7 +802,15 @@ export const SelectedGotchi = ({ name, traits, svg }: Props) => {
 };
 ```
 
+Next, to hide the SVG background, in `SelectedGotchi/styles.css`, add the following:
+```
+.svg-container .gotchi-bg,.wearable-bg {
+  display: none;
+}
+```
+
 You should now be able to see the selected Aavegotchi's SVG:
+
 ![Aavegotchi Dapp Complete](/public/images/complete.jpg)
 
 

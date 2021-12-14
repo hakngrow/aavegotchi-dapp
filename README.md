@@ -747,7 +747,63 @@ function App() {
 
 The Aavegotchi listing should now have the colors that represents each individual Aavegotchi collateral.
 
-![](/public/images/components-GotchiListing-colors.jpg))
+![GotchiListing with collateral colors](/public/images/components-GotchiListing-colors.jpg)
+
+### Displaying the Aavegotchi SVG
+
+Next we have to display the selected Aavegotchi's image. All the Aavegotchi SVG’s are stored within the blockchain itself. Base on the [Aavegotchi Documentation](https://docs.aavegotchi.com/diamond-facets/svgfacet.sol) the method to use is `getAavegotchiSvg(tokenId)`. This method requires passing an Aavegotchis Id as a parameter.
+
+Every time we select a Aavegotchi we want to render the SVG within our `SelectedGotchi` component. We will use a new `useEffect()` hook that will trigger every time `selectedGotchi`, `gotchis` or `contract` changes:
+```
+//App.tsx
+
+function App() {
+  ...
+  const [ gotchiSVG, setGotchiSVG ] = useState('');
+
+  ...
+
+  useEffect(() => {
+    const getAavegotchiSVG = async (tokenId: string) => {
+      const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
+      setGotchiSVG(svg);
+    };
+
+    if (contract && gotchis.length > 0) {
+      getAavegotchiSVG(gotchis[selectedGotchi].id);
+    }
+  }, [selectedGotchi, contract, gotchis]);
+```
+
+Pass the SVG data into the `<SelectedGotchi/>` component as below:
+```
+  ...
+  <SelectedGotchi
+    svg={gotchiSVG}
+    name={gotchis[selectedGotchi].name}
+    traits={gotchis[selectedGotchi].withSetsNumericTraits}
+  />
+  ...
+```
+
+In the `SelectedGotchi` component, we add the `svg` property to the interface so we can use it as a `prop`. In `src/components/SelectedGotchi/index.tsx`, make the following changes:
+```
+...
+interface Props {
+  name: string;
+  traits: Array<Number>;
+  svg: string;
+}
+
+export const SelectedGotchi = ({ name, traits, svg }: Props) => {
+  return (
+    ...
+  );
+};
+```
+
+You should now be able to see the selected Aavegotchi's SVG:
+![Aavegotchi Dapp Complete](/public/images/complete.jpg)
 
 
 

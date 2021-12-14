@@ -81,7 +81,6 @@ function App() {
     const getAavegotchiSVG = async (tokenId: string) => {
       const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
       setGotchiSVG(svg);
-      console.log(gotchiSVG);
     };
 
     if (contract && gotchis.length > 0) {

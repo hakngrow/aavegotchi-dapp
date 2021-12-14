@@ -641,6 +641,35 @@ Calling methods on a contract may require gas. This applies to methods that have
 First, we want to call the [`getCollateralInfo()`](https://docs.aavegotchi.com/diamond-facets/collateralfacet.sol#function-getcollateralinfo-external) method to retrieve the collateral primary colors, so that we can pass each `<GotchiListing/>` component the correct color. By visiting the [Aavegotchi Developer Documentation](https://docs.aavegotchi.com/) you can find the methods names for the various contracts. 
 
 To do this, create a new `useEffect()` hook within `App.tsx` which has the contract as a dependency:
+```
+//App.tsx
+
+  useEffect(() => {
+    if (!!contract) {
+      const fetchAavegotchiCollaterals = async () => {
+        const collaterals = await contract.methods.getCollateralInfo(1).call();
+        console.log(collaterals);
+      };
+      fetchAavegotchiCollaterals();
+    }
+  }, [contract]);
+
+  return (
+    ...
+  );
+```
+
+> Notice the use of the double bang (exclamation) prefix in `!!contract`. In short, the double bang converts a truthy or falsy value to a boolean `true` or `false`.  For more information on the double bang, click [here](https://medium.com/@chirag.viradiya_30404/whats-the-double-exclamation-sign-for-in-javascript-d93ed5ad8491).
+
+The `fetchAavegotiCollaterals()` function will only be triggered if contract is truthy. On initial render, it will not execute as the contract was not set up, and thus, falsy. 
+After `connectToWeb3()`,  `contract` contains a reference to the Aavegotchi smart contract, and becomes, truthy.  And because `contract` is a dependency, `useEffect()` will now trigger `fetchAavegotiCollaterals()` as a side effect to the contract changing.
+
+You should see the different collaterals logged in your browser's console.
+![Aavegotchi Collaterals](/public/images/console-fetchAavegotchiCollaterals.jpg)
+
+
+
+
 
 
 
